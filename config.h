@@ -106,7 +106,7 @@ static char *colors[][ColCount] = {
 
 
 
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {TERMINAL, "-n",    "spcalc", "-f", "monospace:size=16",
                         "-g",     "50x20", "-e",     "bc", "-lq",
                         NULL};
@@ -312,7 +312,7 @@ static Key keys[] = {
 
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
 	{ MODKEY,                       XK_g,          shiftviewclients,       { .i = -1 } },
-	{ MODKEY,                       XK_h,          shiftviewclients,       { .i = +1 } },
+	{ MODKEY,                       XK_semicolon,  shiftviewclients,       { .i = +1 } },
 	// { MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
 	{ MODKEY,                       XK_q,          killclient,             {0} },
 	// { MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
