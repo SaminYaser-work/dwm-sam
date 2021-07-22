@@ -270,7 +270,7 @@ static const char *dmenucmd[] = {
 	"-sf", selfgcolor,
 	NULL
 };
-static const char *termcmd[]  = { "TERMINAL", NULL };
+static const char *termcmd[]  = { TERMINAL, NULL };
 
 /* This defines the name of the executable that handles the bar (used for signalling purposes) */
 #define STATUSBAR "dwmblocks"
@@ -311,10 +311,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_a,          defaultgaps,            {0} },
 
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
-	{ MODKEY|Mod4Mask,              XK_Tab,        shiftviewclients,       { .i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_backslash,  shiftviewclients,       { .i = +1 } },
+	{ MODKEY,                       XK_g,          shiftviewclients,       { .i = -1 } },
+	{ MODKEY,                       XK_h,          shiftviewclients,       { .i = +1 } },
 	// { MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
-	{ MODKEY|ShiftMask,             XK_q,          killclient,             {0} },
+	{ MODKEY,                       XK_q,          killclient,             {0} },
 	// { MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
 	
     //layouts
@@ -408,16 +408,16 @@ static Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask           button          function        argument */
-	{ ClkLtSymbol,          0,                   Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,                   Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,                   Button1,        togglewin,      {0} },
-	{ ClkWinTitle,          0,                   Button3,        showhideclient, {0} },
-	{ ClkWinTitle,          0,                   Button2,        zoom,           {0} },
+	// { ClkLtSymbol,          0,                   Button1,        setlayout,      {0} },
+	// { ClkLtSymbol,          0,                   Button3,        setlayout,      {.v = &layouts[2]} },
+	// { ClkWinTitle,          0,                   Button1,        togglewin,      {0} },
+	// { ClkWinTitle,          0,                   Button3,        showhideclient, {0} },
+	// { ClkWinTitle,          0,                   Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,                   Button1,        sigstatusbar,   {.i = 1 } },
 	{ ClkStatusText,        0,                   Button2,        sigstatusbar,   {.i = 2 } },
 	{ ClkStatusText,        0,                   Button3,        sigstatusbar,   {.i = 3 } },
 	{ ClkClientWin,         MODKEY,              Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,              Button2,        togglefloating, {0} },
+	// { ClkClientWin,         MODKEY,              Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,              Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,                   Button1,        view,           {0} },
 	{ ClkTagBar,            0,                   Button3,        toggleview,     {0} },
