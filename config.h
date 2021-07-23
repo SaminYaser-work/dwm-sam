@@ -279,33 +279,15 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 
 static Key keys[] = {
 	/* modifier                     key            function                argument */
-	// { MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	STACKKEYS(MODKEY,                              focus)
 	STACKKEYS(MODKEY|ShiftMask,                    push)
 
-	
     { MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_l,          setmfact,               {.f = +0.05} },
-	// { MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
-	// { MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
 	
-
 	{ MODKEY,                       XK_z,          incrgaps,               {.i = +3 } },
 	{ MODKEY,                       XK_x,          incrgaps,               {.i = -3 } },
-
-	// { MODKEY|Mod4Mask,              XK_i,          incrigaps,              {.i = +1 } },
-	// { MODKEY|Mod4Mask|ShiftMask,    XK_i,          incrigaps,              {.i = -1 } },
-	// { MODKEY|Mod4Mask,              XK_o,          incrogaps,              {.i = +1 } },
-	// { MODKEY|Mod4Mask|ShiftMask,    XK_o,          incrogaps,              {.i = -1 } },
-	// { MODKEY|Mod4Mask,              XK_6,          incrihgaps,             {.i = +1 } },
-	// { MODKEY|Mod4Mask|ShiftMask,    XK_6,          incrihgaps,             {.i = -1 } },
-	// { MODKEY|Mod4Mask,              XK_7,          incrivgaps,             {.i = +1 } },
-	// { MODKEY|Mod4Mask|ShiftMask,    XK_7,          incrivgaps,             {.i = -1 } },
-	// { MODKEY|Mod4Mask,              XK_8,          incrohgaps,             {.i = +1 } },
-	// { MODKEY|Mod4Mask|ShiftMask,    XK_8,          incrohgaps,             {.i = -1 } },
-	// { MODKEY|Mod4Mask,              XK_9,          incrovgaps,             {.i = +1 } },
-	// { MODKEY|Mod4Mask|ShiftMask,    XK_9,          incrovgaps,             {.i = -1 } },
 	
     { MODKEY,                       XK_a,          togglegaps,             {0} },
 	{ MODKEY|ShiftMask,             XK_a,          defaultgaps,            {0} },
@@ -313,10 +295,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
 	{ MODKEY,                       XK_g,          shiftviewclients,       { .i = -1 } },
 	{ MODKEY,                       XK_semicolon,  shiftviewclients,       { .i = +1 } },
-	// { MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
-	{ MODKEY,                       XK_q,          killclient,             {0} },
-	// { MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
 	
+	{ MODKEY,                       XK_q,          killclient,             {0} },
+		
     //layouts
     { MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
     { MODKEY|ShiftMask,             XK_t,          setlayout,              {.v = &layouts[1]} },
@@ -331,25 +312,13 @@ static Key keys[] = {
     { MODKEY,                       XK_o,          incnmaster,             {.i = +1 } },
     { MODKEY|ShiftMask,             XK_o,          incnmaster,             {.i = -1 } },
 
-
     { MODKEY,                       XK_space,      zoom,                          {0} },
 	{ MODKEY|ShiftMask,             XK_space,      togglefloating,         {0} },
 
 	{ MODKEY,                       XK_apostrophe, togglescratch,          {.ui = 1 } },
     { MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
     { MODKEY|ShiftMask,             XK_Return,     togglescratch,          {.ui = 0 } },
-
-	// { MODKEY|ControlMask,           XK_grave,      setscratch,             {.ui = 0 } },
-	// { MODKEY|ShiftMask,             XK_grave,      removescratch,          {.ui = 0 } },
-	
-    { MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} },
-
-	// { MODKEY,                       XK_0,          view,                   {.ui = ~SPTAGMASK } },
-	// { MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~SPTAGMASK } },
-	
-
-    { MODKEY,                       XK_0,          view,                   {.ui = ~0 } },
-    { MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~0 } },
+    { MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} },  
 
     { MODKEY,                       XK_Left,       focusmon,               {.i = -1 } },
 	{ MODKEY,                       XK_Right,      focusmon,               {.i = +1 } },
@@ -380,17 +349,11 @@ static Key keys[] = {
     {0,                           XF86XK_TaskPane, spawn,                  SHCMD(TERMINAL " -e htop")},
     {0,                               XF86XK_Mail, spawn,                  SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks")},
     {0,                         XF86XK_MyComputer, spawn,                  SHCMD(TERMINAL " -e lf /")},
-    /* { 0, XF86XK_Battery,     spawn,      SHCMD("") }, */
     {0,                            XF86XK_Launch1, spawn,                  SHCMD("xset dpms force off")},
-    /* {0, XF86XK_TouchpadToggle, spawn, SHCMD("TouchpadToggle")}, */
-    {0,                        XF86XK_TouchpadOff, spawn,                  SHCMD("synclient TouchpadOff=1")},
-    {0,                         XF86XK_TouchpadOn, spawn,                  SHCMD("synclient TouchpadOff=0")},
-    /* {0, XF86XK_MonBrightnessUp, spawn, */
-    /*  SHCMD("sudo brillo -A 2 && brightnessNotify")}, // xbacklight -inc 8
-     */
-    /* {0, XF86XK_MonBrightnessDown, spawn, */
-    /*  SHCMD("sudo brillo -U 2 && brightnessNotify")}, // xbacklight -dec 8
-     */
+    {0,                     XF86XK_TouchpadToggle, spawn,                  SHCMD("TouchpadToggle")},
+    {0,                    XF86XK_MonBrightnessUp, spawn,                  SHCMD("sudo brillo -A 2 && brightnessNotify")}, // xbacklight -inc 8
+    {0,                  XF86XK_MonBrightnessDown, spawn,                  SHCMD("sudo brillo -U 2 && brightnessNotify")}, // xbacklight -dec 8
+     
 
 	TAGKEYS(                        XK_1,                                  0)
 	TAGKEYS(                        XK_2,                                  1)
@@ -401,6 +364,34 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                                  6)
 	TAGKEYS(                        XK_8,                                  7)
 	TAGKEYS(                        XK_9,                                  8)
+	{ MODKEY,                       XK_0,          view,                   {.ui = ~0 } },
+    { MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~0 } },
+
+
+	// { MODKEY|Mod4Mask,              XK_i,          incrigaps,              {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_i,          incrigaps,              {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_o,          incrogaps,              {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_o,          incrogaps,              {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_6,          incrihgaps,             {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_6,          incrihgaps,             {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_7,          incrivgaps,             {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_7,          incrivgaps,             {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_8,          incrohgaps,             {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_8,          incrohgaps,             {.i = -1 } },
+	// { MODKEY|Mod4Mask,              XK_9,          incrovgaps,             {.i = +1 } },
+	// { MODKEY|Mod4Mask|ShiftMask,    XK_9,          incrovgaps,             {.i = -1 } },
+	// { MODKEY,                       XK_0,          view,                   {.ui = ~SPTAGMASK } },
+	// { MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~SPTAGMASK } },
+	// { MODKEY|ShiftMask,             XK_j,          movestack,              {.i = +1 } },
+	// { MODKEY|ShiftMask,             XK_k,          movestack,              {.i = -1 } },
+	// { MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
+	// { MODKEY|ControlMask,           XK_grave,      setscratch,             {.ui = 0 } },
+	// { MODKEY|ShiftMask,             XK_grave,      removescratch,          {.ui = 0 } },
+	// { MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
+	// { MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
+	/* { 0,                       XF86XK_Battery,     spawn,                  SHCMD("") }, */
+    // { 0,                       XF86XK_TouchpadOff, spawn,                  SHCMD("synclient TouchpadOff=1")},
+    // { 0,                        XF86XK_TouchpadOn, spawn,                  SHCMD("synclient TouchpadOff=0")},
 };
 
 
