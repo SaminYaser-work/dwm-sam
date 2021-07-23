@@ -217,21 +217,21 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },
-    { "TTT",      bstack }, 
+    { "TTT",      bstack },
 
     { "(@)",      spiral },
     { "[\\]",     dwindle },
 
-    { "[D]",      deck },    
+    { "[D]",      deck },
 	{ "[M]",      monocle },
-	
+
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
-	
+
 
     { "><>",      NULL },
     { NULL,      NULL },
-	
+
 };
 
 
@@ -274,8 +274,6 @@ static const char *termcmd[]  = { TERMINAL, NULL };
 
 /* This defines the name of the executable that handles the bar (used for signalling purposes) */
 #define STATUSBAR "dwmblocks"
-#include <X11/XF86keysym.h>
-
 
 static Key keys[] = {
 	/* modifier                     key            function                argument */
@@ -283,21 +281,37 @@ static Key keys[] = {
 	STACKKEYS(MODKEY,                              focus)
 	STACKKEYS(MODKEY|ShiftMask,                    push)
 
+	TAGKEYS(                        XK_1,                                  0)
+	TAGKEYS(                        XK_2,                                  1)
+	TAGKEYS(                        XK_3,                                  2)
+	TAGKEYS(                        XK_4,                                  3)
+	TAGKEYS(                        XK_5,                                  4)
+	TAGKEYS(                        XK_6,                                  5)
+	TAGKEYS(                        XK_7,                                  6)
+	TAGKEYS(                        XK_8,                                  7)
+	TAGKEYS(                        XK_9,                                  8)
+	{ MODKEY,                       XK_0,          view,                   {.ui = ~0 } },
+    { MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~0 } },
+
+
+    //Size
     { MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_l,          setmfact,               {.f = +0.05} },
-	
+
+    //Gaps
 	{ MODKEY,                       XK_z,          incrgaps,               {.i = +3 } },
 	{ MODKEY,                       XK_x,          incrgaps,               {.i = -3 } },
-	
     { MODKEY,                       XK_a,          togglegaps,             {0} },
 	{ MODKEY|ShiftMask,             XK_a,          defaultgaps,            {0} },
 
+    //Shiftview
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
 	{ MODKEY,                       XK_g,          shiftviewclients,       { .i = -1 } },
 	{ MODKEY,                       XK_semicolon,  shiftviewclients,       { .i = +1 } },
-	
+
+    //Close program
 	{ MODKEY,                       XK_q,          killclient,             {0} },
-		
+
     //layouts
     { MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
     { MODKEY|ShiftMask,             XK_t,          setlayout,              {.v = &layouts[1]} },
@@ -311,61 +325,19 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_f,          setlayout,              {.v = &layouts[8]} },
     { MODKEY,                       XK_o,          incnmaster,             {.i = +1 } },
     { MODKEY|ShiftMask,             XK_o,          incnmaster,             {.i = -1 } },
+    { MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} },
 
-    { MODKEY,                       XK_space,      zoom,                          {0} },
+    { MODKEY,                       XK_space,      zoom,                   {0} },
 	{ MODKEY|ShiftMask,             XK_space,      togglefloating,         {0} },
 
 	{ MODKEY,                       XK_apostrophe, togglescratch,          {.ui = 1 } },
     { MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
     { MODKEY|ShiftMask,             XK_Return,     togglescratch,          {.ui = 0 } },
-    { MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} },  
 
     { MODKEY,                       XK_Left,       focusmon,               {.i = -1 } },
 	{ MODKEY,                       XK_Right,      focusmon,               {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_Left,       tagmon,                 {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Right,      tagmon,                 {.i = +1 } },
-
-    {MODKEY,                        XK_Print,      spawn,                  SHCMD("dmenurecord")},
-    {MODKEY|ShiftMask,              XK_Print,      spawn,                  SHCMD("dmenurecord kill")},
-    {MODKEY,                        XK_Delete,     spawn,                  SHCMD("dmenurecord kill")},
-    {MODKEY,                        XK_Scroll_Lock,spawn,                  SHCMD("killall screenkey || screenkey &")},
-
-
-    {0,                          XF86XK_AudioPrev, spawn,                  SHCMD("mpc prev")},
-    {0,                          XF86XK_AudioNext, spawn,                  SHCMD("mpc next")},
-    {0,                         XF86XK_AudioPause, spawn,                  SHCMD("mpc pause")},
-    {0,                          XF86XK_AudioPlay, spawn,                  SHCMD("mpc play")},
-    {0,                          XF86XK_AudioStop, spawn,                  SHCMD("mpc stop")},
-    {0,                        XF86XK_AudioRewind, spawn,                  SHCMD("mpc seek -10")},
-    {0,                       XF86XK_AudioForward, spawn,                  SHCMD("mpc seek +10")},
-    {0,                         XF86XK_AudioMedia, spawn,                  SHCMD(TERMINAL " -e ncmpcpp")},
-    {0,                       XF86XK_AudioMicMute, spawn,                  SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle")},
-    {0,                           XF86XK_PowerOff, spawn,                  SHCMD("sysact")},
-    {0,                         XF86XK_Calculator, spawn,                  SHCMD(TERMINAL " -e bc -l")},
-    {0,                              XF86XK_Sleep, spawn,                  SHCMD("sudo -A zzz")},
-    {0,                                XF86XK_WWW, spawn,                  SHCMD("$BROWSER")},
-    {0,                                XF86XK_DOS, spawn,                  SHCMD(TERMINAL)},
-    {0,                        XF86XK_ScreenSaver, spawn,                  SHCMD("slock & xset dpms force off; mpc pause; pauseallmpv")},
-    {0,                           XF86XK_TaskPane, spawn,                  SHCMD(TERMINAL " -e htop")},
-    {0,                               XF86XK_Mail, spawn,                  SHCMD(TERMINAL " -e neomutt ; pkill -RTMIN+12 dwmblocks")},
-    {0,                         XF86XK_MyComputer, spawn,                  SHCMD(TERMINAL " -e lf /")},
-    {0,                            XF86XK_Launch1, spawn,                  SHCMD("xset dpms force off")},
-    {0,                     XF86XK_TouchpadToggle, spawn,                  SHCMD("TouchpadToggle")},
-    {0,                    XF86XK_MonBrightnessUp, spawn,                  SHCMD("sudo brillo -A 2 && brightnessNotify")}, // xbacklight -inc 8
-    {0,                  XF86XK_MonBrightnessDown, spawn,                  SHCMD("sudo brillo -U 2 && brightnessNotify")}, // xbacklight -dec 8
-     
-
-	TAGKEYS(                        XK_1,                                  0)
-	TAGKEYS(                        XK_2,                                  1)
-	TAGKEYS(                        XK_3,                                  2)
-	TAGKEYS(                        XK_4,                                  3)
-	TAGKEYS(                        XK_5,                                  4)
-	TAGKEYS(                        XK_6,                                  5)
-	TAGKEYS(                        XK_7,                                  6)
-	TAGKEYS(                        XK_8,                                  7)
-	TAGKEYS(                        XK_9,                                  8)
-	{ MODKEY,                       XK_0,          view,                   {.ui = ~0 } },
-    { MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~0 } },
 
 
 	// { MODKEY|Mod4Mask,              XK_i,          incrigaps,              {.i = +1 } },
@@ -389,9 +361,6 @@ static Key keys[] = {
 	// { MODKEY|ShiftMask,             XK_grave,      removescratch,          {.ui = 0 } },
 	// { MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
 	// { MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
-	/* { 0,                       XF86XK_Battery,     spawn,                  SHCMD("") }, */
-    // { 0,                       XF86XK_TouchpadOff, spawn,                  SHCMD("synclient TouchpadOff=1")},
-    // { 0,                        XF86XK_TouchpadOn, spawn,                  SHCMD("synclient TouchpadOff=0")},
 };
 
 
@@ -415,6 +384,4 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,              Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,              Button3,        toggletag,      {0} },
 };
-
-
 
