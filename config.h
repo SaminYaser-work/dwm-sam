@@ -4,11 +4,11 @@
 #define TERMCLASS "St"
 
 /* appearance */
-static const unsigned int borderpx       = 1;   /* border pixel of windows */
+static const unsigned int borderpx       = 2;   /* border pixel of windows */
 static const unsigned int snap           = 15;  /* snap pixel */
 static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
-static const unsigned int gappih         = 10;  /* horiz inner gap between windows */
-static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
+static const unsigned int gappih         = 5;  /* horiz inner gap between windows */
+static const unsigned int gappiv         = 5;  /* vert inner gap between windows */
 static const unsigned int gappoh         = 5;  /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov         = 5;  /* vert outer gap between windows and screen edge */
 static const int smartgaps_fact          = 0;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
@@ -18,7 +18,7 @@ static const int bar_height              = 0;   /* 0 means derive from font, >= 
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int showsystray             = 1;   /* 0 means no systray */
 /* Indicators: see patch/bar_indicators.h for options */
-static int tagindicatortype              = INDICATOR_TOP_LEFT_SQUARE;
+static int tagindicatortype              = INDICATOR_BOTTOM_BAR;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_TOP_LEFT_SQUARE;
 // static const char *fonts[]               = { "monospace:size=10" };
@@ -35,13 +35,13 @@ static const char dmenufont[]            = "monospace:size=10";
 static char c000000[]                    = "#000000"; // placeholder value
 
 static char normfgcolor[]                = "#bbbbbb";
-static char normbgcolor[]                = "#222222";
+static char normbgcolor[]                = "#282828";
 static char normbordercolor[]            = "#444444";
 static char normfloatcolor[]             = "#db8fd9";
 
 static char selfgcolor[]                 = "#eeeeee";
-static char selbgcolor[]                 = "#005577";
-static char selbordercolor[]             = "#005577";
+static char selbgcolor[]                 = "#282828";
+static char selbordercolor[]             = "#EED202";
 static char selfloatcolor[]              = "#005577";
 
 static char titlenormfgcolor[]           = "#bbbbbb";
@@ -50,17 +50,17 @@ static char titlenormbordercolor[]       = "#444444";
 static char titlenormfloatcolor[]        = "#db8fd9";
 
 static char titleselfgcolor[]            = "#eeeeee";
-static char titleselbgcolor[]            = "#005577";
+static char titleselbgcolor[]            = "#282828";
 static char titleselbordercolor[]        = "#005577";
 static char titleselfloatcolor[]         = "#005577";
 
 static char tagsnormfgcolor[]            = "#bbbbbb";
-static char tagsnormbgcolor[]            = "#222222";
+static char tagsnormbgcolor[]            = "#282828";
 static char tagsnormbordercolor[]        = "#444444";
 static char tagsnormfloatcolor[]         = "#db8fd9";
 
 static char tagsselfgcolor[]             = "#eeeeee";
-static char tagsselbgcolor[]             = "#005577";
+static char tagsselbgcolor[]             = "#504945";
 static char tagsselbordercolor[]         = "#005577";
 static char tagsselfloatcolor[]          = "#005577";
 
@@ -75,7 +75,7 @@ static char urgbordercolor[]             = "#ff0000";
 static char urgfloatcolor[]              = "#db8fd9";
 
 
-static const unsigned int baralpha = 0xd0;
+static const unsigned int baralpha = 0xff;
 static const unsigned int borderalpha = OPAQUE;
 static const unsigned int alphas[][3] = {
 	/*                       fg      bg        border     */
@@ -107,9 +107,8 @@ static char *colors[][ColCount] = {
 
 
 const char *spcmd1[] = {TERMINAL, "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {TERMINAL, "-n",    "spcalc", "-f", "monospace:size=16",
-                        "-g",     "50x20", "-e",     "bc", "-lq",
-                        NULL};
+const char *spcmd2[] = {TERMINAL, "-n", "spcalc", "-f", "monospace:size=16",
+                        "-g", "50x20", "-e", "bc", "-lq", NULL};
 static Sp scratchpads[] = {
    /* name          cmd  */
    {"spterm",      spcmd1},
@@ -144,7 +143,7 @@ static Sp scratchpads[] = {
  * them. This works seamlessly with alternative tags and alttagsdecoration patches.
  */
 static char *tagicons[][NUMTAGS] = {
-	[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+	[DEFAULT_TAGS]        = { " ﷲ ", "2", "3", "4", "5", "6", "7", "8", "9" },
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
 	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
@@ -182,6 +181,7 @@ static const Rule rules[] = {
 	RULE(.class = "Gimp", .tags = 1 << 4)
 	RULE(.class = "Firefox", .tags = 1 << 7)
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
+	RULE(.instance = "spcalc", .tags = SPTAG(1), .isfloating = 1)
 };
 
 
@@ -201,9 +201,9 @@ static const Rule rules[] = {
 static const BarRule barrules[] = {
 	/* monitor  bar    alignment         widthfunc                drawfunc                clickfunc                name */
 	{ -1,       0,     BAR_ALIGN_LEFT,   width_tags,              draw_tags,              click_tags,              "tags" },
-	{  0,       0,     BAR_ALIGN_RIGHT,  width_systray,           draw_systray,           click_systray,           "systray" },
+	{ -1,       0,     BAR_ALIGN_RIGHT,  width_systray,           draw_systray,           click_systray,           "systray" },
 	{ -1,       0,     BAR_ALIGN_LEFT,   width_ltsymbol,          draw_ltsymbol,          click_ltsymbol,          "layout" },
-	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_status2d,          draw_status2d,          click_statuscmd,         "status2d" },
+	{ -1,       0,     BAR_ALIGN_RIGHT,  width_status2d,          draw_status2d,          click_statuscmd,         "status2d" },
 	{ -1,       0,     BAR_ALIGN_NONE,   width_wintitle,          draw_wintitle,          click_wintitle,          "wintitle" },
 };
 
@@ -327,18 +327,20 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_o,          incnmaster,             {.i = -1 } },
     { MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} },
 
-    { MODKEY,                       XK_space,      zoom,                   {0} },
-	{ MODKEY|ShiftMask,             XK_space,      togglefloating,         {0} },
+    { MODKEY,                       XK_space,      zoom,                   {0} }, //Make master
+	{ MODKEY|ShiftMask,             XK_space,      togglefloating,         {0} }, //Make floating
 
 	{ MODKEY,                       XK_apostrophe, togglescratch,          {.ui = 1 } },
-    { MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
+    { MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } }, //terminal
     { MODKEY|ShiftMask,             XK_Return,     togglescratch,          {.ui = 0 } },
 
-    { MODKEY,                       XK_Left,       focusmon,               {.i = -1 } },
-	{ MODKEY,                       XK_Right,      focusmon,               {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_Left,       tagmon,                 {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_Right,      tagmon,                 {.i = +1 } },
+    { MODKEY,                      XK_bracketleft, focusmon,               {.i = -1 } },
+	{ MODKEY,                     XK_bracketright, focusmon,               {.i = +1 } },
+	{ MODKEY|ShiftMask,            XK_bracketleft, tagmon,                 {.i = -1 } },
+	{ MODKEY|ShiftMask,           XK_bracketright, tagmon,                 {.i = +1 } },
 
+    //restarts DWM (Needs modification in .Xinitrc)
+    { MODKEY|ShiftMask,             XK_grave,      quit,                   {0} },
 
 	// { MODKEY|Mod4Mask,              XK_i,          incrigaps,              {.i = +1 } },
 	// { MODKEY|Mod4Mask|ShiftMask,    XK_i,          incrigaps,              {.i = -1 } },
@@ -360,7 +362,6 @@ static Key keys[] = {
 	// { MODKEY|ControlMask,           XK_grave,      setscratch,             {.ui = 0 } },
 	// { MODKEY|ShiftMask,             XK_grave,      removescratch,          {.ui = 0 } },
 	// { MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
-	// { MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
 };
 
 
