@@ -340,6 +340,9 @@ static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
+
+static void togglefullscreen(const Arg *arg);
+
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unfocus(Client *c, int setfocus, Client *nextfocus);
@@ -2188,6 +2191,14 @@ togglefloating(const Arg *arg)
 	}
 	arrange(c->mon);
 
+}
+
+void
+togglefullscreen(const Arg *arg) {
+    if (!selmon->sel)
+        return;
+
+    setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
 }
 
 void

@@ -323,7 +323,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_u,          setlayout,              {.v = &layouts[5]} },
     { MODKEY,                       XK_i,          setlayout,              {.v = &layouts[6]} },
     { MODKEY|ShiftMask,             XK_i,          setlayout,              {.v = &layouts[7]} },
-    { MODKEY,                       XK_f,          fullscreen,             {0} },
+    // { MODKEY,                       XK_f,          fullscreen,             {0} }, //fullscreen with monocle
+    { MODKEY,                       XK_f,          togglefullscreen,        {0} }, //real fullscreen
     { MODKEY|ShiftMask,             XK_f,          setlayout,              {.v = &layouts[8]} },
     { MODKEY,                       XK_o,          incnmaster,             {.i = +1 } },
     { MODKEY|ShiftMask,             XK_o,          incnmaster,             {.i = -1 } },
