@@ -21,13 +21,11 @@ static const int showsystray             = 1;   /* 0 means no systray */
 static int tagindicatortype              = INDICATOR_BOTTOM_BAR;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_TOP_LEFT_SQUARE;
-// static const char *fonts[]               = { "monospace:size=10" };
 
 static char *fonts[] = {
     "JetBrains Mono:pixelsize=14:antialias=true:autohint=true",
     "Noto Naskh Arabic UI:pixelsize=15:antialias=true:autohint=true",
-    "JetBrainsMonoExtraBold Nerd Font "
-    "Mono:pixelsize=22:antialias=true:autohint=true",
+    "JetBrainsMonoExtraBold Nerd Font Mono:pixelsize=22:antialias=true:autohint=true",
     "JoyPixels:pixelsize=15:antialias=true:autohint=true"};
 
 static const char dmenufont[]            = "monospace:size=10";
@@ -218,21 +216,21 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },
-    { "TTT",      bstack },
+	{ "[T]",        tile },
+    { "[B]",      bstack },
 
-    { "(@)",      spiral },
-    { "[\\]",     dwindle },
+    { "[S]",      spiral },
+    { "[DW]",     dwindle },
 
-    { "[D]",      deck },
-	{ "[M]",      monocle },
+    { "[D]",        deck },
+	{ "[M]",     monocle },
 
-	{ "|M|",      centeredmaster },
-	{ ">M>",      centeredfloatingmaster },
+	{ "[CM]",          centeredmaster },
+	{ "[CFM]",         centeredfloatingmaster },
 
 
-    { "><>",      NULL },
-    { NULL,      NULL },
+    { "[F]",    NULL },
+    { NULL,            NULL },
 
 };
 
@@ -315,20 +313,22 @@ static Key keys[] = {
 	{ MODKEY,                       XK_q,          killclient,             {0} },
 
     //layouts
-    { MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
-    { MODKEY|ShiftMask,             XK_t,          setlayout,              {.v = &layouts[1]} },
-    { MODKEY,                       XK_y,          setlayout,              {.v = &layouts[2]} },
-    { MODKEY|ShiftMask,             XK_y,          setlayout,              {.v = &layouts[3]} },
-    { MODKEY,                       XK_u,          setlayout,              {.v = &layouts[4]} },
-    { MODKEY|ShiftMask,             XK_u,          setlayout,              {.v = &layouts[5]} },
-    { MODKEY,                       XK_i,          setlayout,              {.v = &layouts[6]} },
-    { MODKEY|ShiftMask,             XK_i,          setlayout,              {.v = &layouts[7]} },
+    { MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} }, //tile
+    { MODKEY|ShiftMask,             XK_t,          setlayout,              {.v = &layouts[1]} }, //bstack
+    { MODKEY,                       XK_y,          setlayout,              {.v = &layouts[2]} }, //Spiral
+    { MODKEY|ShiftMask,             XK_y,          setlayout,              {.v = &layouts[3]} }, //Dwindle
+    { MODKEY,                       XK_u,          setlayout,              {.v = &layouts[4]} }, //Deck
+    { MODKEY|ShiftMask,             XK_u,          setlayout,              {.v = &layouts[5]} }, //Monocle
+    { MODKEY,                       XK_i,          setlayout,              {.v = &layouts[6]} }, //CM
+    { MODKEY|ShiftMask,             XK_i,          setlayout,              {.v = &layouts[7]} }, //CFM
     // { MODKEY,                       XK_f,          fullscreen,             {0} }, //fullscreen with monocle
     { MODKEY,                       XK_f,          togglefullscreen,        {0} }, //real fullscreen
-    { MODKEY|ShiftMask,             XK_f,          setlayout,              {.v = &layouts[8]} },
+    { MODKEY|ShiftMask,             XK_f,          setlayout,              {.v = &layouts[8]} }, //floating
+    { MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} }, //makes window sticky
+
+    //Increase or decrease Master
     { MODKEY,                       XK_o,          incnmaster,             {.i = +1 } },
     { MODKEY|ShiftMask,             XK_o,          incnmaster,             {.i = -1 } },
-    { MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} },
 
     { MODKEY,                       XK_space,      zoom,                   {0} }, //Make master
 	{ MODKEY|ShiftMask,             XK_space,      togglefloating,         {0} }, //Make floating
