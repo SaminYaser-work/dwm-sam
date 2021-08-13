@@ -377,18 +377,47 @@ static Button buttons[] = {
 	// { ClkWinTitle,          0,                   Button1,        togglewin,      {0} },
 	// { ClkWinTitle,          0,                   Button3,        showhideclient, {0} },
 	// { ClkWinTitle,          0,                   Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,                   Button1,        sigdwmblocks,   {.i = 1 } },
-	{ ClkStatusText,        0,                   Button2,        sigdwmblocks,   {.i = 2 } },
-	{ ClkStatusText,        0,                   Button3,        sigdwmblocks,   {.i = 3 } },
-    { ClkStatusText,        0,                   Button4,        sigdwmblocks,   {.i = 4 } },
-    { ClkStatusText,        0,                   Button5,        sigdwmblocks,   {.i = 5 } },
-    { ClkStatusText,    ShiftMask,               Button1,        sigdwmblocks,   {.i = 6 } },
-	{ ClkClientWin,         MODKEY,              Button1,        movemouse,      {0} },
+
+	/* { ClkStatusText,        0,                   Button1,        sigdwmblocks,   {.i = 1 } }, */
+	/* { ClkStatusText,        0,                   Button2,        sigdwmblocks,   {.i = 2 } }, */
+	/* { ClkStatusText,        0,                   Button3,        sigdwmblocks,   {.i = 3 } }, */
+    /* { ClkStatusText,        0,                   Button4,        sigdwmblocks,   {.i = 4 } }, */
+    /* { ClkStatusText,        0,                   Button5,        sigdwmblocks,   {.i = 5 } }, */
+    /* { ClkStatusText,    ShiftMask,               Button1,        sigdwmblocks,   {.i = 6 } }, */
+	/* { ClkClientWin,         MODKEY,              Button1,        movemouse,      {0} }, */
+
 	// { ClkClientWin,         MODKEY,              Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,              Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,                   Button1,        view,           {0} },
-	{ ClkTagBar,            0,                   Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,              Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,              Button3,        toggletag,      {0} },
+
+	/* { ClkClientWin,         MODKEY,              Button3,        resizemouse,    {0} }, */
+	/* { ClkTagBar,            0,                   Button1,        view,           {0} }, */
+	/* { ClkTagBar,            0,                   Button3,        toggleview,     {0} }, */
+	/* { ClkTagBar,            MODKEY,              Button1,        tag,            {0} }, */
+	/* { ClkTagBar,            MODKEY,              Button3,        toggletag,      {0} }, */
+
+
+
+#ifndef __OpenBSD__
+    { ClkWinTitle,             0,                   Button2,         zoom,          {0} },
+    { ClkStatusText,           0,                   Button1,         sigdwmblocks,  {.i = 1 } },
+    { ClkStatusText,           0,                   Button2,         sigdwmblocks,  {.i = 2 } },
+    { ClkStatusText,           0,                   Button3,         sigdwmblocks,  {.i = 3 } },
+    { ClkStatusText,           0,                   Button4,         sigdwmblocks,  {.i = 4 } },
+    { ClkStatusText,           0,                   Button5,         sigdwmblocks,  {.i = 5 } },
+    { ClkStatusText,           ShiftMask,           Button1,         sigdwmblocks,  {.i = 6 } },
+#endif
+    {ClkStatusText,            ShiftMask,           Button3,         spawn,
+        SHCMD(TERMINAL " -e nvim ~/.local/src/dwmblocks/config.h")},
+    { ClkClientWin,            MODKEY,              Button1,          movemouse,    {0} },
+    { ClkClientWin,            MODKEY,              Button2,          defaultgaps,  {0} },
+    { ClkClientWin,            MODKEY,              Button3,          resizemouse,  {0} },
+    /* { ClkClientWin,            MODKEY,              Button4,          incrgaps,     {.i = +1 } }, */
+    /* { ClkClientWin,            MODKEY,              Button5,          incrgaps,     {.i = -1 } }, */
+    { ClkTagBar,               0,                   Button1,          view,         {0} },
+    { ClkTagBar,               0,                   Button3,          toggleview,   {0} },
+    { ClkTagBar,               MODKEY,              Button1,          tag,          {0} },
+    { ClkTagBar,               MODKEY,              Button3,          toggletag,    {0} },
+    { ClkTagBar,               0,                   Button4,     shiftviewclients,  {.i = -1 } },
+    { ClkTagBar,               0,                   Button5,     shiftviewclients,  {.i = 1 } },
+    { ClkRootWin,              0,                   Button2,          togglebar,    {0} },
 };
 
