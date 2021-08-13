@@ -216,21 +216,21 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[T]",        tile },
-    { "[B]",      bstack },
+	{ "[T]",                       tile },
+    { "[B]",                     bstack },
 
-    { "[S]",      spiral },
-    { "[DW]",     dwindle },
+    { "[S]",                     spiral },
+    { "[DW]",                   dwindle },
 
-    { "[D]",        deck },
-	{ "[M]",     monocle },
+    { "[D]",                       deck },
+	{ "[M]",                    monocle },
 
-	{ "[CM]",          centeredmaster },
-	{ "[CFM]",         centeredfloatingmaster },
+	{ "[CM]",            centeredmaster },
+	{ "[CFM]",   centeredfloatingmaster },
 
 
-    { "[F]",    NULL },
-    { NULL,            NULL },
+    { "[F]",                       NULL },
+    { NULL,                        NULL },
 
 };
 
@@ -324,7 +324,7 @@ static Key keys[] = {
     // { MODKEY,                       XK_f,          fullscreen,             {0} }, //fullscreen with monocle
     { MODKEY,                       XK_f,          togglefullscreen,        {0} }, //real fullscreen
     { MODKEY|ShiftMask,             XK_f,          setlayout,              {.v = &layouts[8]} }, //floating
-    { MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} }, //makes window sticky
+    { MODKEY,                       XK_s,          togglesticky,           {0} }, //makes window sticky
 
     //Increase or decrease Master
     { MODKEY,                       XK_o,          incnmaster,             {.i = +1 } },
@@ -377,9 +377,12 @@ static Button buttons[] = {
 	// { ClkWinTitle,          0,                   Button1,        togglewin,      {0} },
 	// { ClkWinTitle,          0,                   Button3,        showhideclient, {0} },
 	// { ClkWinTitle,          0,                   Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,                   Button1,        sigstatusbar,   {.i = 1 } },
-	{ ClkStatusText,        0,                   Button2,        sigstatusbar,   {.i = 2 } },
-	{ ClkStatusText,        0,                   Button3,        sigstatusbar,   {.i = 3 } },
+	{ ClkStatusText,        0,                   Button1,        sigdwmblocks,   {.i = 1 } },
+	{ ClkStatusText,        0,                   Button2,        sigdwmblocks,   {.i = 2 } },
+	{ ClkStatusText,        0,                   Button3,        sigdwmblocks,   {.i = 3 } },
+    { ClkStatusText,        0,                   Button4,        sigdwmblocks,   {.i = 4 } },
+    { ClkStatusText,        0,                   Button5,        sigdwmblocks,   {.i = 5 } },
+    { ClkStatusText,    ShiftMask,               Button1,        sigdwmblocks,   {.i = 6 } },
 	{ ClkClientWin,         MODKEY,              Button1,        movemouse,      {0} },
 	// { ClkClientWin,         MODKEY,              Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,              Button3,        resizemouse,    {0} },
