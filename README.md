@@ -1,6 +1,6 @@
 # dwm-sam
-My build of dwm made with (dwm-flexipatch)[https://github.com/bakkeby/dwm-flexipatch]
-Cleaned afterward using (flexipatch-finalizer)[https://github.com/bakkeby/flexipatch-finalizer]
+My build of dwm made with [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch).
+Cleaned afterward using [flexipatch-finalizer](https://github.com/bakkeby/flexipatch-finalizer)
 
 ## Patches used from flexipatch
 A few of the patches were merged by default by flexipatch
@@ -48,8 +48,8 @@ A few of the patches were merged by default by flexipatch
 41. MONOCLE_LAYOUT
 
 ## Patches manually merged in later
-1. (Steam Patch)[https://dwm.suckless.org/patches/steam/]
-2. (True Fullscreen Patch)[https://dwm.suckless.org/patches/actualfullscreen/] (Not monocle layout with hidden bar)
+1. [Steam Patch](https://dwm.suckless.org/patches/steam/)
+2. [True Fullscreen Patch](https://dwm.suckless.org/patches/actualfullscreen/) (Not monocle layout with hidden bar)
 
 ### TODO:
 1. Add clickable modules.
