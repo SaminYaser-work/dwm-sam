@@ -1,1 +1,55 @@
 # dwm-sam
+My build of dwm made with (dwm-flexipatch)[https://github.com/bakkeby/dwm-flexipatch]
+Cleaned afterward using (flexipatch-finalizer)[https://github.com/bakkeby/flexipatch-finalizer]
+
+## Patches used from flexipatch
+A few of the patches were merged by default by flexipatch
+
+1.  BAR_DWMBLOCKS_PATCH
+2.  BAR_LTSYMBOL_PATCH
+3.  BAR_STATUS_PATCH
+4.  BAR_STATUSCMD_PATCH
+5.  BAR_STATUS2D_PATCH
+6.  BAR_SYSTRAY_PATCH
+7.  BAR_TAGS_PATCH
+8.  BAR_WINTITLE_PATCH
+9.  BAR_TITLE_LEFT_PAD_PATCH
+10. BAR_ALPHA_PATCH
+11. BAR_CENTEREDWINDOWNAME_PATCH
+12. BAR_COLOR_EMOJI_PATCH
+13. BAR_HEIGHT_PATCH
+14. BAR_HIDEVACANTTAGS_PATCH
+15. ATTACHBOTTOM_PATCH
+16. CENTER_PATCH
+17. CENTER_TRANSIENT_WINDOWS_PATCH
+18. FULLSCREEN_PATCH
+19. MONOCLESYMBOL_PATCH
+20. MOVESTACK_PATCH
+21. NOBORDER_PATCH
+22. PERTAG_PATCH
+23. PERTAG_VANITYGAPS_PATCH
+24. SCRATCHPADS_PATCH
+25. SCRATCHPADS_KEEP_POSITION_AND_SIZE_PATCH
+26. SHIFTVIEW_CLIENTS_PATCH
+27. STACKER_PATCH
+28. STICKY_PATCH
+29. SWALLOW_PATCH
+30. SWAPTAGS_PATCH
+31. VANITYGAPS_PATCH
+32. VIEWONTAG_PATCH
+33. ZOOMSWAP_PATCH
+34. BSTACK_LAYOUT
+35. CENTEREDMASTER_LAYOUT
+36. CENTEREDFLOATINGMASTER_LAYOUT
+37. DECK_LAYOUT
+38. FIBONACCI_DWINDLE_LAYOUT
+39. FIBONACCI_SPIRAL_LAYOUT
+40. TILE_LAYOUT
+41. MONOCLE_LAYOUT
+
+## Patches manually merged in later
+1. (Steam Patch)[https://dwm.suckless.org/patches/steam/]
+2. (True Fullscreen Patch)[https://dwm.suckless.org/patches/actualfullscreen/] (Not monocle layout with hidden bar)
+
+### TODO:
+1. Add clickable modules.
